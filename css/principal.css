@@ -1,0 +1,128 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+header, section, footer, aside, nav, article, figure {
+    display: block;
+}
+
+#panelNorte {
+	background: #d7d3d3; /*#167cce*/
+	/*background: url(../img/layout-browser-hd-bg.gif) repeat-x;
+	height: '100%';*/
+}
+
+h1{
+	text-align: center;
+	font-family: arial;
+	font-size: 20px;
+	color: brown;
+}
+
+h2{
+	text-align: left;
+	font-size: 15px;		
+}
+
+#map{	
+	height: 100%;
+	width: 100%;
+	border: 1px solid black;
+	position: absolute;
+}
+
+#map-canvas {
+	height: 100%;
+}
+
+td.tabla_titulo h3{
+	font-size: 12px;
+	font-family: arial;
+	color: blue;
+}
+
+#grafica td, th{		
+	padding : 3px;
+}
+
+#grafica{
+	width: 80%;	
+	height: 100%;	
+	text-align: center;
+	margin-left: 10%;	
+}
+
+td.tabla_titulo h3{
+	font-size: 12px;
+	font-family: arial;
+	color: blue;
+}
+
+#despachos {    
+	width: 66.5em;
+    height: 17.7em; 
+    margin-left: 20em;
+    margin-top: 10em;
+    background-image: url(../img/logo.png);
+}
+
+/*Iconos Hoy - Ayer*/
+.icon-today {background-image: url(../img/icon_hoy.png) !important;}
+.icon-yesterday {background-image: url(../img/icon_ayer.png) !important;}
+
+/*Iconos Parqueadero*/
+.icon-parqueo {background-image: url(../img/icon_parking.png) !important;}
+.icon-parking {background-image: url(../img/parking.png) !important;}
+.icon-obtener-coord {background-image: url(../img/obtener_coord.png) !important;}
+.icon-editar-parking {background-image: url(../img/icon_editar.png) !important;}
+.icon-asignar-plazas {background-image: url(../img/asignar_plazas.png) !important;}
+.icon-estadistica {background-image: url(../img/icon_estadistica.png) !important;}
+.icon-grafica-por-dia {background-image: url(../img/grafica_por_dia.png) !important;}
+.icon-save-img {background-image: url(../img/save_img.png) !important;}
+
+/*Otros*/
+.icon-reportes {background-image: url(../img/reportes.png) !important;}
+.icon-recorridos {background-image: url(../img/recorridos.png) !important;}
+.icon-general {background-image: url(../img/general.png) !important;}
+.icon-despachos {background-image: url(../img/despachos.png) !important;}
+.icon-rutas {background-image: url(../img/rutas.png) !important;}
+.icon-pos-des-coop {background-image: url(../img/pos_despachos_coop.png) !important;}
+.icon-pos-des-ruta {background-image: url(../img/pos_despachos_ruta.png) !important;}
+.icon-time-manual {background-image: url(../img/manual.png) !important;}
+.icon-obtener {background-image: url(../img/obtener.png) !important;}
+.icon-localizame {background-image: url(../img/localizame.png) !important;}
+
+.icon-cancelar {background-image: url(../img/cross.gif) !important;}
+.bus{background-image: url(../img/bus_rojo.png) !important;}
+.coopIco{background-image: url(../img/icon_empresa.png) !important;}
+.puntoIco{background-image: url(../img/connect.gif) !important;}
+.estacionIco{background-image: url(../img/localizacion.png) !important;}
+.icon-Administracion{background-image: url(../img/admin.png) !important;}
+.icon-save {background-image: url(../img/save.gif) !important;}
+.icon-user-add {background-image: url(../img/user_add.gif) !important;}
+.icon-user {background-image: url(../img/user.gif) !important;}
+.icon-consultas {background-image: url(../img/icon_consultas.png) !important;}
+.icon-reset {background-image: url(../img/icon_reset.png) !important;}
+.icon-delete {background-image: url(../img/delete.gif) !important;}
+.icon-personal {background-image: url(../img/user_suit.gif) !important;}
+.icon-bus{background-image: url(../img/icon_bus.png) !important;}
+.icon-direccion{background-image: url(../img/book.png) !important;}
+.icon-negocio{background-image: url(../img/icon_negocio.png) !important;}
+.icon-plugin{background-image: url(../img/plugin.gif) !important;}
+.icon-monitoreo {background-image: url(../img/icon_monitoreo.png) !important;}
+.icon-excel {background-image: url(../img/excel.png) !important;}
+.icon-mapa {background-image: url(../img/globe-icon.png) !important;}
+.icon-por-ruta {background-image: url(../img/globe-icon.png) !important;}
+.icon-check {background-image: url(../img/spellCheck.png) !important;}
+.icon-par-cer {background-image: url(../img/icon_par_cer.png) !important;}
+.icon-buscar-paradas {background-image: url(../img/buscar_paradas.png) !important;}
+//para geocercas
+.icon-delete {background-image: url(../img/delete.gif) !important;}
+.icon-add{background-image: url(../img/icon_add.gif) !important;}
+
+
+#icono{
+	position: absolute;	
+	bottom: 15px; right: 25px;
+}

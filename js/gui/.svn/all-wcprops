@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/svn/!svn/ver/65/trunk/IRBU/core/js/gui
+END
+RQ1_POPUP.js
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/42/trunk/IRBU/core/js/gui/RQ1_POPUP.js
+END
+RQ3_busqueda_aprox.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/67/trunk/IRBU/core/js/gui/RQ3_busqueda_aprox.js
+END
+ventanaBuscarRutas.js
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/67/trunk/IRBU/core/js/gui/ventanaBuscarRutas.js
+END
+ventanaLocalizarParadaHora.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/60/trunk/IRBU/core/js/gui/ventanaLocalizarParadaHora.js
+END
+contenedorPrincipal.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/64/trunk/IRBU/core/js/gui/contenedorPrincipal.js
+END
