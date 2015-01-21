@@ -92,7 +92,7 @@ Ext.onReady(function () {
 
     formRecordsParkingS = Ext.create('Ext.form.Panel', {
         region: 'center',
-        title: 'Ingresar Datos del Sitio de Recaudo',
+        title: 'Ingresar Datos del Parqueadero',
         activeRecord: null,
         bodyPadding: '10 10 10 10',
         margin: '0 0 0 3',
@@ -152,11 +152,13 @@ Ext.onReady(function () {
                     ,
                     {
                         name: 'latitudS',
+                        id: 'latitudS',
                         fieldLabel: 'Latitud:',
                         emptyText: 'Latitud..',
                         allowBlank: false
                     }, {
                         name: 'longitudS',
+                        id: 'longitudS',
                         fieldLabel: 'Longitud:',
                         emptyText: 'Longitud..',
                         allowBlank: false
@@ -223,7 +225,7 @@ function showWinAdminParking() {
     if (!winAdminParkings) {
         winAdminParkings = Ext.create('Ext.window.Window', {
             layout: 'fit',
-            title: 'Administración de Sitios de Recaudo',
+            title: 'Administración de Parqueaderos Privados',
             iconCls: 'icon-person',
             resizable: false,
             width: 780,

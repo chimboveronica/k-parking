@@ -168,6 +168,18 @@ Ext.onReady(function () {
             window.location = 'php/login/logout.php';
         }
     });
+    var limpiar = Ext.create('Ext.button.Button', {
+        text: 'Limpiar Mapa',
+        scope: this,
+        icon: 'img/clean.png',
+        handler: function () {
+            lienzoLocalizar.destroyFeatures();
+            var lat = -3.9992;
+            var lon = -79.19833;
+            var zoom = 15;
+            centrarMapa(lon, lat, zoom);
+        }
+    });
 
     var barraMenu = Ext.create('Ext.toolbar.Toolbar', {
         width: '100%',
@@ -176,7 +188,8 @@ Ext.onReady(function () {
             opciones,
             administracion,
             extra,
-            salir
+            salir,
+            limpiar
         ]
     });
 
@@ -193,6 +206,22 @@ Ext.onReady(function () {
             barraMenu]
     });
 
+    Ext.define('siteModel', {
+        extend: 'Ext.data.Model',
+        fields: [
+            {name: 'text'},
+            {name: 'iconCls'},
+            {name: 'id'},
+            {name: 'leaf'},
+            {name: 'latitud'},
+            {name: 'longitud'}
+        ],
+        proxy: {
+            type: 'ajax',
+            url: 'php/tree/getTreeSite.php',
+            format: 'json'
+        },
+    });
     Ext.define('parkingModel', {
         extend: 'Ext.data.Model',
         fields: [
@@ -212,6 +241,9 @@ Ext.onReady(function () {
 
     var storeTreeParking = Ext.create('Ext.data.TreeStore', {
         model: 'parkingModel'
+    });
+    var storeTreeSite = Ext.create('Ext.data.TreeStore', {
+        model: 'siteModel'
     });
 
     var panelEste = Ext.create('Ext.form.Panel', {
@@ -274,7 +306,54 @@ Ext.onReady(function () {
                         localizarDireccion(record.data.longitud, record.data.latitud, 17);
                     }
                 }
-            }]
+            },
+            {
+                xtype: 'treepanel',
+                id: 'sitios-tree',
+                title: 'Sitios Recaudo',
+                autoScroll: true,
+                iconCls: 'icon-parqueo',
+                store: storeTreeSite,
+                rootVisible: false,
+                tools: [{
+                        type: 'help',
+                        handler: function () {
+                            // show help here
+                        }
+                    }, {
+                        type: 'refresh',
+                        itemId: 'refresh_puntos',
+                        tooltip: 'Refresh form Data',
+                        hidden: true,
+                        handler: function () {
+                            var tree = Ext.getCmp('puntos-tree');
+                            tree.body.mask('Loading', 'x-mask-loading');
+                            /*storeTreeBuses.reload(function(){
+                             tree.body.unmask();
+                             Ext.example.msg('Buses', 'Recargado');
+                             });*/
+                            storeTreeSite.reload();
+                            Ext.example.msg('Mensaje', 'Parqueaderos Recargados..');
+                            tree.body.unmask();
+                        }
+                    }, {
+                        type: 'search',
+                        handler: function (event, target, owner, tool) {
+                            // do search                    
+                            owner.child('#refresh_puntos').show();
+                        }
+                    }],
+                root: {
+                    dataIndex: 'text',
+                    expanded: true
+                },
+                listeners: {
+                    itemclick: function (thisObject, record, item, index, e, eOpts) {
+                        localizarDireccion(record.data.longitud, record.data.latitud, 17);
+                    }
+                }
+            }
+        ]
     });
 
     Ext.define("direcciones", {
@@ -354,7 +433,7 @@ Ext.onReady(function () {
     });
 
     var panelCentral = Ext.create('Ext.form.Panel', {
-        id:'panel-map',
+        id: 'panel-map',
         frame: true,
         region: 'center',
         html: '<div id="map"><div>'
@@ -365,18 +444,18 @@ Ext.onReady(function () {
         items: [panelMenu, panelEste, panelCentral]
     });
 
-loadMap() ;
-cargaZonas();
-});  
+    loadMap();
+    cargaZonas();
+});
 
-function cargaZonas(){
-    var formZonas= Ext.create('Ext.form.Panel', {});
+function cargaZonas() {
+    var formZonas = Ext.create('Ext.form.Panel', {});
     var form = formZonas.getForm();
     form.submit({
         url: 'php/extra/getZonas.php',
         success: function (form, action) {
             for (var i = 0; i < action.result.data.length; i++) {
-                drawPoligonoGeocerca1(action.result.data[i].coordenadas,action.result.data[i].nombre,action.result.data[i].color);
+                drawPoligonoGeocerca1(action.result.data[i].coordenadas, action.result.data[i].nombre, action.result.data[i].color);
             }
         },
         failure: function (form, action) {

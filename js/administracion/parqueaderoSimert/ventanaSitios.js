@@ -116,21 +116,7 @@ Ext.onReady(function () {
                         name: 'img',
                         hidden: true
                     },
-                    {
-                        fieldLabel: '<b>Sitio</b>',
-                        afterLabelTextTpl: required,
-                        blankText: 'Este campo es obligatorio',
-                        name: 'nombre',
-                        allowBlank: false,
-                        emptyText: 'Ingresar nombre',
-                    }, {
-                        fieldLabel: '<b>Dirección</b>',
-                        afterLabelTextTpl: required,
-                        blankText: 'Este campo es obligatorio',
-                        name: 'direccion',
-                        allowBlank: false,
-                        emptyText: 'Ingresar Dirección...',
-                    },
+                    
                     {
                         xtype: 'filefield',
                         name: 'imageFile',
@@ -160,7 +146,7 @@ Ext.onReady(function () {
                     }, {
                         xtype: 'image',
                         name: 'labelImage',
-                        src: 'img/fotos/sin_img.png',
+                        src: 'img/fotos/sitio.jpg',
                         height: 100,
                         border: 2,
                         margin: '0 0 0 115',
@@ -171,6 +157,21 @@ Ext.onReady(function () {
                         }
                     },
                     {
+                        fieldLabel: '<b>Sitio</b>',
+                        afterLabelTextTpl: required,
+                        blankText: 'Este campo es obligatorio',
+                        name: 'nombre',
+                        allowBlank: false,
+                        emptyText: 'Ingresar nombre',
+                    }, {
+                        fieldLabel: '<b>Dirección</b>',
+                        afterLabelTextTpl: required,
+                        blankText: 'Este campo es obligatorio',
+                        name: 'direccion',
+                        allowBlank: false,
+                        emptyText: 'Ingresar Dirección...',
+                    },
+                    {
                         xtype: 'textarea',
                         fieldLabel: '<b>Descripción</b>',
                         name: 'descripcion',
@@ -179,11 +180,13 @@ Ext.onReady(function () {
                     },
                     {
                         name: 'latitudSitio',
+                        id: 'latitudSitio',
                         fieldLabel: '<b>Latitud:</b>',
                         emptyText: 'Latitud..',
                         allowBlank: false
                     }, {
                         name: 'longitudSitio',
+                        id: 'longitudSitio',
                         fieldLabel: '<b>Longitud:</b>',
                         emptyText: 'Longitud..',
                         allowBlank: false
@@ -300,7 +303,7 @@ function onCreateSitio() {
 
 function onResetSitio() {
     formAdminSitio.getForm().reset();
-    formAdminSitio.down('[name=labelImage]').setSrc('img/fotos/sin_img.png');
+    formAdminSitio.down('[name=labelImage]').setSrc('img/fotos/sitio.jpg');
     formAdminSitio.down('#delete').disable();
 
     gridAdminSitio.getView().deselect(gridAdminSitio.getSelection());

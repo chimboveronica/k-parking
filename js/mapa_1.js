@@ -116,10 +116,27 @@ function loadMap() {
             var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"),
                     map.getProjectionObject());
             map.setCenter(lonLat, zoom);
-
             map.events.register('click', map, function (e) {
-            }
-            );
+                if (obtenerParqueadero) {
+                    var coord = map.getLonLatFromViewPortPx(e.xy);
+                    var aux = new OpenLayers.Geometry.Point(coord.lon, coord.lat);
+                    aux.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
+                    Ext.getCmp('latitudS').setValue(aux.y);
+                    Ext.getCmp('longitudS').setValue(aux.x);
+                    winAdminParkings.show();
+                    positionPoint = false;
+                }
+                
+                 if (obtenerLatLon) {
+                    var coord = map.getLonLatFromViewPortPx(e.xy);
+                    var aux = new OpenLayers.Geometry.Point(coord.lon, coord.lat);
+                    aux.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
+                    Ext.getCmp('latitudSitio').setValue(aux.y);
+                    Ext.getCmp('longitudSitio').setValue(aux.x);
+                    winAdminSitio.show();
+                    positionPoint = false;
+                }
+            });
 
             var styleVehicle = new OpenLayers.StyleMap({
                 externalGraphic: "${iconLast}",
@@ -1075,6 +1092,8 @@ function buscarParadas(idPointMap) {
 function centrarMapa(ln, lt, zoom) {
     var nivelZoom = zoom;
     var lonlatCenter = new OpenLayers.LonLat(ln, lt);
+    lonlatCenter.transform(new OpenLayers.Projection("EPSG:4326"),
+            map.getProjectionObject());
     map.setCenter(lonlatCenter, nivelZoom);
 }
 
