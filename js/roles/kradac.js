@@ -199,7 +199,9 @@ Ext.onReady(function () {
             {name: 'text'},
             {name: 'iconCls'},
             {name: 'id'},
-            {name: 'leaf'}
+            {name: 'leaf'},
+            {name: 'latitud'},
+            {name: 'longitud'}
         ],
         proxy: {
             type: 'ajax',
@@ -269,10 +271,7 @@ Ext.onReady(function () {
                 },
                 listeners: {
                     itemclick: function (thisObject, record, item, index, e, eOpts) {
-                        var aux = record.internalId;
-                        var idEquipo = record.data.id;
-                        showParking(idEquipo);
-                        //searchDirection(record.data.longitud, record.data.latitud, 17);
+                        localizarDireccion(record.data.longitud, record.data.latitud, 17);
                     }
                 }
             }]

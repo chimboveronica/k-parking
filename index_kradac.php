@@ -50,10 +50,10 @@ echo "
         <script type="text/javascript" src="js/mapa_1.js"></script>
         <!--<script type="text/javascript" src="js/mapaGoogle.js"></script>-->
 
-        <script type="text/javascript" src="js/core/cargarCapas.js"></script>
-        <script type="text/javascript" src="js/core/trazarRuta.js"></script>
+        <!--<script type="text/javascript" src="js/core/cargarCapas.js"></script>-->
+<!--        <script type="text/javascript" src="js/core/trazarRuta.js"></script>
         <script type="text/javascript" src="js/core/limpiarCapas.js"></script>
-        <script type="text/javascript" src="js/core/lienzoCapas.js"></script>
+        <script type="text/javascript" src="js/core/lienzoCapas.js"></script>-->
         <script type="text/javascript" src="js/core/obtenerPos.js"></script>
 
         <script type="text/javascript" src="js/gui/ventanaEditarPuntos.js"></script>
