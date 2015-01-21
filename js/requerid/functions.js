@@ -177,3 +177,12 @@ function check_cedula(b){
         return false
     }
 }
+
+function connectionMap() {
+    if (typeof OpenLayers !== 'undefined') {
+        return true;
+    } else {
+        Ext.example.msg('Mensaje', 'El mapa se encuentra deshabilitado.');
+        return false;
+    }
+}

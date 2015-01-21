@@ -1,13 +1,20 @@
 <?php
 
-require_once('../../../dll/conect.php');
-
+require_once('../../dll/conect.php');
 
 if (!$mysqli = getConectionDb()) {
     echo "{success:false, message: 'Error: No se ha podido conectar a la Base de Datos.<br>Compruebe su conexión a Internet.',state: false}";
 } else {
 
-     function coneccion() {if (!$mysqli = getConectionDb()) {} else {return $mysqli;}}
+
+    function coneccion() {
+        if (!$mysqli = getConectionDb()) {
+            
+        } else {
+            return $mysqli;
+        }
+    }
+
     function obtenerPuntosGepocerca($idGeo) {
         $consultaSql2 = "SELECT latitud, longitud FROM puntos_zonas where id_zona='$idGeo' ORDER BY orden;";
         $result2 = coneccion()->query($consultaSql2);
@@ -31,7 +38,7 @@ if (!$mysqli = getConectionDb()) {
     $coordenadas;
     $result = $mysqli->query($consultaSql);
     $idGeo;
-    $objJson = "{data: [";
+    $objJson = "data: [";
 
     while ($myrow = $result->fetch_assoc()) {
         $objJson .= "{"
@@ -45,8 +52,9 @@ if (!$mysqli = getConectionDb()) {
                 . "tiempoFraccion:'" . $myrow["tiempo_fraccion"] . "',"
                 . "descripcion:'" . utf8_encode($myrow["descripcion"]) . "'},";
     }
-    $objJson .= "]}";
-    echo $objJson;
+    $objJson .= "]";
+    echo "{success: true,$objJson}";
+
     $mysqli->close();
 }
 

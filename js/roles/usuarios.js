@@ -314,5 +314,17 @@ Ext.onReady(function() {
     Ext.create('Ext.container.Viewport', {
         layout: 'border',
         items: [panelMenu, panelEste, panelCentral]
+    });  var formRutas = Ext.create('Ext.form.Panel', {});
+    var form = formRutas.getForm();
+    form.submit({
+        url: 'php/extra/getZonas.php',
+        success: function (form, action) {
+            for (var i = 0; i < action.result.data.length; i++) {
+                drawZonas(action.result.data[i].coordenadas);
+            }
+        },
+        failure: function (form, action) {
+        }
     });
+    
 });

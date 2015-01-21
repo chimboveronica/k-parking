@@ -11,7 +11,7 @@ var gridRecordsZona;
 var vertPolygonos = "";
 var trazar = 0;
 var gridStoreGeocercas;
-var drawRoute=true;
+var drawRoute = true;
 var geometria;
 var id_empresageos = 0;
 var areaEdit;
@@ -25,9 +25,11 @@ Ext.onReady(function () {
             {name: 'nombre'},
             {name: 'horario'},
             {name: 'color'},
-            {name: 'tiempo'},
-            {name: 'tiempoFraccion'},
             {name: 'descripcion'},
+            {name: 'area'},
+            {name: 'coordenadas'},
+            {name: 'tiempo', type: 'date', dateFormat: 'H:i:s'},
+            {name: 'tiempoFraccion', type: 'date', dateFormat: 'H:i:s'},
         ]
     });
 
@@ -40,9 +42,9 @@ Ext.onReady(function () {
             type: 'ajax',
             api: {
                 read: 'php/administracion/zona/read.php',
-                create: 'php/admin/zona/create.php',
-                update: 'php/admin/zona/update.php',
-                destroy: 'php/admin/zona/destroy.php'
+                create: 'php/administracion/zona/create.php',
+                update: 'php/administracion/zona/update.php',
+                destroy: 'php/administracion/zona/destroy.php'
             },
             reader: {
                 type: 'json',
@@ -89,31 +91,29 @@ Ext.onReady(function () {
 
     // declare the source Grid
     gridRecordsZona = Ext.create('Ext.grid.Panel', {
-        viewConfig: {
-            plugins: {
-                ddGroup: 'grid-to-form',
-                ptype: 'gridviewdragdrop',
-                enableDrop: false
-            }
-        },
+        width: '45%',
+        margins: '0 2 0 0',
+        region: 'west',
         store: gridStore,
         columns: columns,
-        enableDragDrop: true,
         stripeRows: true,
         height: 380,
-        selModel: Ext.create('Ext.selection.RowModel', {singleSelect: true}),
-        features: [filters]
-                //Para cuando de click a una de las filas se pasen los datos
-                /*listeners: {
-                 selectionchange: function ( thisObject, selected, eOpts ){
-                 //console.log(selected[0]);
-                 setActiveRecordUser(selected[0] || null);
-                 },
-                 
-                 itemmousedown: function( thisObject, record, item, index, e, eOpts ){
-                 //console.log('mouse sobre item');
-                 }
-                 }*/
+        features: [filters],
+        listeners: {
+            selectionchange: function (thisObject, selected, eOpts) {
+                if (selected.length > 0) {
+                    setActiveRecordZona(selected[0]);
+                    var record = selected[0];
+                    lines.destroyFeatures();
+                    drawRoute = false;
+                    cargaZonas();
+                    drawPoligonoGeocerca(record.data.coordenadas);
+                    formRecordsZona.down('#saveZona').enable();
+                    formRecordsZona.down('#createZona').disable();
+                    formRecordsZona.down('#deleteZona').enable();
+                }
+            }
+        }
     });
 
     var formPanelGrid = Ext.create('Ext.form.Panel', {
@@ -126,7 +126,6 @@ Ext.onReady(function () {
 
 
     formRecordsZona = Ext.create('Ext.form.Panel', {
-        id: 'panel-datos-user',
         region: 'center',
         title: 'Ingresar Datos de la Zona',
         activeRecord: null,
@@ -142,10 +141,8 @@ Ext.onReady(function () {
         },
         items: [{
                 xtype: 'fieldset',
-                checkboxToggle: true,
                 title: 'Datos de la zona',
                 defaultType: 'textfield',
-                collapsed: false,
                 layout: 'anchor',
                 defaults: {
                     anchor: '100%'
@@ -165,32 +162,27 @@ Ext.onReady(function () {
                     },
                     {
                         xtype: 'timefield',
-                        fieldLabel: 'Tiempo máximo',
-                        afterLabelTextTpl: required,
-                        blankText: 'Este campo es obligatorio',
                         name: 'tiempo',
-                        allowBlank: false,
+                        fieldLabel: 'Tiempo máximo',
+                        blankText: 'Este campo es obligatorio',
                         format: 'H:i:s',
-                        invalidText: 'Formato ingresado incorrecto',
                         value: '00:00:00',
                         minValue: '00:00:00',
                         maxValue: '1:59:00',
-                        emptyText: '00:15:00'
-                    },
+                        emptyText: '00:15:00',
+                        invalidText: 'El formato de la hora no es válido',
+                        increment: 15},
                     {
                         xtype: 'timefield',
-                        fieldLabel: 'Tiempo de fracción',
-                        afterLabelTextTpl: required,
-                        blankText: 'Este campo es obligatorio',
                         name: 'tiempoFraccion',
-                        allowBlank: false,
+                        fieldLabel: 'Tiempo de fracción',
+                        blankText: 'Este campo es obligatorio',
                         format: 'H:i:s',
-                        invalidText: 'Formato ingresado incorrecto',
-                        value: '00:00:00',
                         minValue: '00:00:00',
                         maxValue: '00:59:00',
-                        emptyText: '00:15:00'
-                    },
+                        emptyText: '00:00:00',
+                        invalidText: 'El formato de la hora no es válido',
+                        increment: 15},
 //        {
 //                xtype: 'numberfield',
 //                name: 'costo',
@@ -200,6 +192,14 @@ Ext.onReady(function () {
 //                maxValue: 20,
 //                minValue: 6
 //            },
+
+                    {
+                        fieldLabel: 'Zona',
+                        name: 'coordenadas',
+                        id: 'coordenadas',
+//                        hidden: true
+
+                    },
                     {
                         xtype: 'textarea',
                         fieldLabel: 'Descripción',
@@ -207,6 +207,15 @@ Ext.onReady(function () {
 //                labelWidth: 20,
                         height: 100,
                         emptyText: 'Ingresar Descripción...'
+                    },
+                    {
+                        fieldLabel: 'Color de Zona',
+                        afterLabelTextTpl: required,
+                        blankText: 'Este campo es obligatorio',
+                        name: 'color',
+                        allowBlank: false,
+                        inputType: 'color',
+                        anchor: '55%'
                     },
                     {
                         xtype: 'panel',
@@ -220,7 +229,7 @@ Ext.onReady(function () {
                                 xtype: 'textfield',
                                 afterLabelTextTpl: required,
                                 id: 'numberfield-point-route',
-                                name: 'areaGeocerca',
+                                name: 'area',
                                 fieldLabel: '<b>Area<b>',
                                 editable: false,
                                 allowBlank: false,
@@ -249,25 +258,23 @@ Ext.onReady(function () {
                                                     iconCls: 'icon-valid',
                                                     text: 'Terminar',
                                                     handler: function () {
-                                                        geometria = lines.features[0].geometry; //figura
-                                                        var linearRing = new OpenLayers.Geometry.LinearRing(geometria.getVertices());
-                                                        var polygonFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Polygon([linearRing]));
-                                                        areaEdit = polygonFeature.geometry.getArea() / 1000;
-                                                        areaEdit = Math.round(areaEdit * 100) / 100;
-                                                        Ext.getCmp('numberfield-point-route').setValue(areaEdit + ' km2');
-                                                        modifyLine.deactivate();
-                                                        var nuevosVertces = geometria.getVertices();
 
-                                                        for (var i = 0; i < nuevosVertces.length; i++) {
-                                                            nuevosVertces[i] = nuevosVertces[i].transform(new OpenLayers.Projection('EPSG:900913'),
-                                                                    new OpenLayers.Projection('EPSG:4326'));
-                                                            coordenadasEdit += nuevosVertces[i].x + ',' + nuevosVertces[i].y;
-                                                            if (i != nuevosVertces.length - 1) {
-                                                                coordenadasEdit += ';';
-                                                            }
-                                                        }
-                                                        console.log("Nuevas Cordenadas editadas  " + coordenadasEdit);
+//                                                                        console.log('terminar');
+//                                                                        var areaGeoce = lines.features[0].geometry.getArea();
+//                                                                        console.log(areaGeoce);
+//                                                                        Ext.getCmp('numberfield-point-route').setValue(lines.features[0].geometry.components.length);
+//                                                                        modifyLine.deactivate();
+//                                                                        winAddGeocerca.show();
+                                                        geometria = lines.features[0].geometry;
+                                                        ////figura
+                                                        console.log(geometria + 'geometria');
+                                                        var area = geometria.getArea() / 1000;
+                                                        area = Math.round(area * 100) / 100;
+                                                        console.log(area);
+                                                        Ext.getCmp('numberfield-point-route').setValue(area);
+                                                        modifyLine.deactivate();
                                                         winAddZona.show();
+                                                        drawRoute = true;
                                                     }
                                                 }]
                                         }).show();
@@ -312,6 +319,7 @@ Ext.onReady(function () {
                     }, {
                         iconCls: 'icon-user-add',
                         text: 'Crear',
+                        itemId: 'createZona',
                         scope: this,
                         tooltip: 'Crear Zona',
                         handler: onCreateZona
@@ -328,13 +336,13 @@ Ext.onReady(function () {
                         text: 'Limpiar',
                         scope: this,
                         tooltip: 'Limpiar Campos',
-                        handler: onResetUser
+                        handler: onResetZona
                     }, {
                         iconCls: 'icon-cancelar',
                         text: 'Cancelar',
                         tooltip: 'Cancelar',
                         scope: this,
-                        handler: clearWinUser
+                        handler: clearWinZona
                     }]
             }]
     });
@@ -347,65 +355,39 @@ Ext.onReady(function () {
             formRecordsZona
         ]
     });
+
 });
 
 function ventAddZona() {
     if (!winAddZona) {
-        winAddZona = Ext.create('Ext.window.Window', {
-            layout: 'fit',
-            title: 'Añadir Zonas',
-            id: 'vtnAddZona',
-            iconCls: 'icon-user',
-            resizable: false,
-            width: 780,
-            height: 460,
-            closeAction: 'hide',
-            plain: false,
-            items: [contenedorZona],
-            listeners: {
-                close: function (panel, eOpts) {
-                    onResetUser();
-                }
-            }
-        });
+        winAddZona =
+                Ext.create('Ext.window.Window', {
+                    layout: 'fit',
+                    title: 'Administración de Zonas',
+                    iconCls: 'icon-person',
+                    resizable: false,
+                    width: 780,
+                    height: 480,
+                    closeAction: 'hide',
+                    plain: false,
+                    items: [{
+                            layout: 'border',
+                            bodyPadding: 5,
+                            items: [
+                                gridRecordsZona,
+                                formRecordsZona
+                            ]
+                        }]
+                });
+
     }
     contenedorZona.getForm().reset();
     winAddZona.show();
 
-    //Esto se asegurará de que sólo caera al contenedor
-    var formPanelDropTargetElUser = document.getElementById('panel-datos-user');
 
-    var formPanelDropTargetUser = Ext.create('Ext.dd.DropTarget', formPanelDropTargetElUser, {
-        ddGroup: 'grid-to-form',
-        notifyEnter: function (ddSource, e, data) {
-
-            // Añadir un poco de brillo al momento de entrar al contenedor
-            formRecordsZona.body.stopAnimation();
-            formRecordsZona.body.highlight();
-        },
-        notifyDrop: function (ddSource, e, data) {
-
-            // Referencia el record (seleccion simple) para facilitar lectura
-            var selectedRecord = ddSource.dragData.records[0];
-
-            setActiveRecordUser(selectedRecord || null);
-
-            // Carga los registro en el form            
-            formRecordsZona.getForm().loadRecord(selectedRecord);
-
-
-            formRecordsZona.down('#saveZona').enable();
-            formRecordsZona.down('#deleteZona').enable();
-
-            // Elimina el registro desde los registros. No es relamente Requerido
-            //ddSource.view.store.remove(selectedRecord);
-
-            return true;
-        }
-    });
 }
 
-function setActiveRecordUser(record) {
+function setActiveRecordZona(record) {
     formRecordsZona.activeRecord = record;
     if (record) {
         formRecordsZona.down('#saveZona').enable();
@@ -423,10 +405,8 @@ function onSaveZona() {
     if (!active) {
         return;
     }
-    if (form.isValid()) {
-        form.updateRecord(active);
-        onResetUser();
-    }
+    form.updateRecord(active);
+    onResetZona;
 }
 
 function onCreateZona() {
@@ -439,14 +419,14 @@ function onCreateZona() {
     }
 }
 
-function onResetUser() {
-    setActiveRecordUser(null);
+function onResetZona() {
+    setActiveRecordZona(null);
     formRecordsZona.down('#deleteZona').disable();
     formRecordsZona.getForm().reset();
 }
 
-function clearWinUser() {
-    onResetUser();
+function clearWinZona() {
+    onResetZona();
     winAddZona.hide();
 }
 

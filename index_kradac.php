@@ -18,8 +18,8 @@ include("php/login/isLogin.php");
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/ux/css/ItemSelector.css">
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/ux/grid/css/GridFilters.css">
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/ux/grid/css/RangeMenu.css">
-        <link rel="stylesheet" type="text/css" href="openLayers/theme/default/style.css">
-        <link rel="stylesheet" type="text/css" href="openLayers/theme/default/google.css">
+        <!--<link rel="stylesheet" type="text/css" href="openLayers/theme/default/style.css">-->
+        <!--<link rel="stylesheet" type="text/css" href="openLayers/theme/default/google.css">-->
         <link rel="stylesheet" type="text/css" href="css/principal.css">
 
         <script type="text/javascript" src="extjs-docs-5.0.0/extjs-build/build/ext-all.js"></script>
@@ -30,7 +30,8 @@ include("php/login/isLogin.php");
 
 
         <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
-        <script src="openLayers/OpenLayers.js"></script>
+        <script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>
+<!--        <script src="openLayers/OpenLayers.js"></script>-->
 
         <script type="text/javascript">
 <?php
@@ -46,7 +47,8 @@ echo "
         <script type="text/javascript" src="js/requerid/functions.js"></script>                        
 
         <script type="text/javascript" src="js/roles/kradac.js"></script>
-        <script type="text/javascript" src="js/mapa.js"></script>
+        <script type="text/javascript" src="js/mapa_1.js"></script>
+        <!--<script type="text/javascript" src="js/mapaGoogle.js"></script>-->
 
         <script type="text/javascript" src="js/core/cargarCapas.js"></script>
         <script type="text/javascript" src="js/core/trazarRuta.js"></script>
@@ -61,8 +63,10 @@ echo "
 
         <script type="text/javascript" src="js/administracion/ventanaPersonal.js"></script>
         <script type="text/javascript" src="js/administracion/ventanaUsuario.js"></script>
-        <script type="text/javascript" src="js/administracion/ventanaParking.js"></script>
-        <script type="text/javascript" src="js/administracion/parqueaderoSimert/zonas/ventanazona.js"></script>
+        <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanaSanciones.js"></script>
+        <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanaSitios.js"></script>
+        <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanazona.js"></script>
+        <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanaParqueaderos.js"></script>
 
         <script type="text/javascript" src="js/extra/ventanaDireccion.js"></script>
     </head>
