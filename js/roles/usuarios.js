@@ -17,8 +17,7 @@ Ext.require([
     'Ext.ajax.*',
     'Ext.ux.PreviewPlugin',
     'Ext.ux.grid.FiltersFeature'
-    /*'Ext.selection.CellModel',
-    'Ext.ux.CheckColumn'*/
+   
 ]);
 
 var panelMapa;
@@ -31,12 +30,8 @@ var lonPos;
 
 var filters = {
     ftype: 'filters',
-    // encode and local configuration options defined previously for easier reuse
-    encode: false, // json encode the filter query
-    local: true,   // defaults to false (remote filtering)
-
-    // Filters are most naturally placed in the column definition, but can also be
-    // added here.
+    encode: false, 
+    local: true,  
     filters: [{
         type: 'boolean',
         dataIndex: 'visible'
@@ -63,10 +58,6 @@ Ext.onReady(function() {
                 end.validate();
                 this.dateRangeMin = date;
             }
-            /*
-             * Always return true since we're only using this vtype to set the
-             * min/max allowed values (these are tested for after the vtype test)
-             */
             return true;
         },
 
@@ -107,20 +98,9 @@ Ext.onReady(function() {
         scope : this,
         iconCls : 'icon-user',
         handler : function() {
-            //window.open('index_login.php');
             location.href = "index_login.php";
         }
     });
-
-    var extra = Ext.create('Ext.button.Button',{
-        text : 'Extra',
-        scope : this,
-        icon : 'img/table_refresh.png',
-        menu : [
-            {text : 'Direcciones', iconCls : 'icon-direccion', handler : function(){ventDireccion();}}
-        ]
-    });
-
     var barraMenu = Ext.create('Ext.toolbar.Toolbar', {        
         width : '100%',        
         items : [login]
@@ -194,10 +174,6 @@ Ext.onReady(function() {
                 handler : function(){
                     var tree = Ext.getCmp('puntos-tree');
                     tree.body.mask('Loading', 'x-mask-loading');
-                    /*storeTreeBuses.reload(function(){
-                        tree.body.unmask();
-                        Ext.example.msg('Buses', 'Recargado');
-                    });*/
                     storeTreeParking.reload();
                     Ext.example.msg('Mensaje', 'Parqueaderos Recargados..');
                     tree.body.unmask(); 
@@ -205,7 +181,6 @@ Ext.onReady(function() {
             },{
                 type: 'search',
                 handler: function(event, target, owner, tool){
-                    // do search                    
                     owner.child('#refresh_puntos').show();
                 }
             }],            
@@ -276,8 +251,6 @@ Ext.onReady(function() {
                 listConfig: {
                     loadingText: 'Buscando...',
                     emptyText: 'No ha encontrado resultados parecidos.',
-
-                    // Custom rendering template for each item
                     getInnerTpl: function() {
                         return '<b>{pais} , {ciudad}:</b><br>{barrio} , {avenidaP} , {avenidaS}';
                     }

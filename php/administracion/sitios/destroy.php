@@ -1,7 +1,4 @@
 <?php
-
-
-
 require_once('../../../dll/conect.php');
 
 if (!$mysqli = getConectionDb()) {

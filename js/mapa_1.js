@@ -606,7 +606,7 @@ function loadMap() {
 
                         var popup = new OpenLayers.Popup.FramedCloud("popup",
                                 OpenLayers.LonLat.fromString(feature.geometry.toShortString()),
-                                new OpenLayers.Size(200, 150),
+                                new OpenLayers.Size(200, 100),
                                 contenidoAlternativo,
                                 null,
                                 true,

@@ -12,7 +12,10 @@ include("php/login/isLogin.php");
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="shortcut icon" href="img/k.png" type="image/x-icon">
 
-        <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css">
+        <!--<link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css">-->
+                <script type="text/javascript" src="extjs-docs-5.0.0/extjs-build/build/examples/shared/options-toolbar.js"></script>
+        <script type="text/javascript" src="extjs-docs-5.0.0/extjs-build/build/examples/shared/include-ext.js"></script>
+
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/shared/example.css">
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/shared/example.css">
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/ux/css/ItemSelector.css">
@@ -61,14 +64,15 @@ echo "
         <script type="text/javascript" src="js/gui/estadisticas/ventanaGraficasOcupados.js"></script>
         <script type="text/javascript" src="js/gui/estadisticas/ventanaGraficasDiario.js"></script>
 
-        <script type="text/javascript" src="js/administracion/ventanaPersonal.js"></script>
-        <script type="text/javascript" src="js/administracion/ventanaUsuario.js"></script>
+        <script type="text/javascript" src="js/administracion/ventanaPersonas.js"></script>
+        <script type="text/javascript" src="js/administracion/ventanaUsuarios.js"></script>
         <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanaSanciones.js"></script>
         <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanaSitios.js"></script>
         <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanazona.js"></script>
         <script type="text/javascript" src="js/administracion/parqueaderoSimert/ventanaParqueaderos.js"></script>
 
         <script type="text/javascript" src="js/extra/ventanaDireccion.js"></script>
+
     </head>
     <body oncontextmenu = "return false">        
         <header></header>

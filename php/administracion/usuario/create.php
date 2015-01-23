@@ -2,35 +2,45 @@
 
 require_once('../../../dll/conect.php');
 
-extract($_POST);
-
-$salida = "{success:false, message:'No se pudo insertar los Datos'}";
-
-$json = json_decode($usuarios, true);
-
-$clave = $json["clave"];
-$clave = $clave[0];
-
-$salt = "KR@D@C";
-$encriptClave = md5(md5(md5($clave) . md5($salt)));
-
-$queryMaxId = "SELECT MAX(ID_USUARIO) AS ID_USER FROM USUARIOS";
-consulta($queryMaxId);
-$data = unicaFila();
-$id_user = $data["ID_USER"]+1;
-
-$insertSql = 
-    "INSERT INTO USUARIOS (ID_USUARIO,ID_ROL_USUARIO,ID_PERSONA,USUARIO,CLAVE,ID_PARKING)
-    VALUES($id_user,".$json["idRol"].",".$json["persona"].",'".$json["usuario"]."','$encriptClave',".$json["idParking"].")"
-;
-$insertSql = utf8_decode($insertSql);
-
-if (consulta($insertSql) == 1) {
-    $salida = "{success:true, message:'Datos Insertados Correctamente.'}";
+if (!$mysqli = getConectionDb()) {
+    echo "{success:true, message: 'Error: No se ha podido conectar a la Base de Datos.<br>Compruebe su conexión a Internet.',state: false}";
 } else {
-    $salida = "{success:false, message:'$insertSql'}";
+
+    $requestBody = file_get_contents('php://input');
+    $json = json_decode($requestBody, true);
+    $clave = $json["clave"];
+    $clave = $clave[0];
+
+    $salt = "KR@D@C";
+    $encriptClave = md5(md5(md5($clave) . md5($salt)));
+
+    $existeSql = "select usuario from usuarios  where usuario='" . $json["usuario"] . "'";
+    $result = $mysqli->query($existeSql);
+    if ($result) {
+        if ($result->num_rows > 0) {
+            echo "{success:true, message:'El usuario ya se encuentra registrado.',state: false}";
+        } else {
+
+            $insertSql = "insert into usuarios(ID_ROL_USUARIO,ID_PERSONA,USUARIO,CLAVE,ID_PARKING)"
+                    . "values(?, ?, ?, ?,?)";
+
+            $stmt = $mysqli->prepare($insertSql);
+            if ($stmt) {
+                $stmt->bind_param("iissi", $json["idRol"], $json["persona"], utf8_decode($json["usuario"]), $encriptClave, $json["idParking"]);
+                $stmt->execute();
+
+                if ($stmt->affected_rows > 0) {
+                    echo "{success:true, message:'Usuario Creado Correctamente.',state: true}";
+                } else {
+                    echo "{success:true, message: 'Problemas al Ingresar los Datos.',state: false}";
+                }
+                $stmt->close();
+            } else {
+                echo "{success:true, message: 'Problemas en la construcción de la consulta.',state: false}";
+            }
+        }
+        $mysqli->close();
+    } else {
+        echo "{success:true, message: 'Problemas en la construcción de la consulta.',state: false}";
+    }
 }
-
-
-echo $salida;
-?>

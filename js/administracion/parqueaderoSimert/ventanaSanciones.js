@@ -181,8 +181,8 @@ function showWinAdminSancion() {
             title: 'Administración de Sitios de Recaudo',
             iconCls: 'icon-person',
             resizable: false,
-            width: 700,
-            height: 300,
+            width: 730,
+            height: 360,
             closeAction: 'hide',
             plain: false,
             items: [{

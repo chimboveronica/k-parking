@@ -17,8 +17,6 @@ Ext.require([
     'Ext.ajax.*',
     'Ext.ux.PreviewPlugin',
     'Ext.ux.grid.FiltersFeature'
-            /*'Ext.selection.CellModel',
-             'Ext.ux.CheckColumn'*/
 ]);
 
 var panelMapa;
@@ -31,12 +29,8 @@ var lonPos;
 
 var filters = {
     ftype: 'filters',
-    // encode and local configuration options defined previously for easier reuse
-    encode: false, // json encode the filter query
-    local: true, // defaults to false (remote filtering)
-
-    // Filters are most naturally placed in the column definition, but can also be
-    // added here.
+    encode: false,
+    local: true,
     filters: [{
             type: 'boolean',
             dataIndex: 'visible'
@@ -63,10 +57,6 @@ Ext.onReady(function () {
                 end.validate();
                 this.dateRangeMin = date;
             }
-            /*
-             * Always return true since we're only using this vtype to set the
-             * min/max allowed values (these are tested for after the vtype test)
-             */
             return true;
         },
         daterangeText: 'Start date must be less than end date',
@@ -110,56 +100,31 @@ Ext.onReady(function () {
                 }}
         ]
     });
-
-    var opciones = Ext.create('Ext.button.Button', {
-        text: 'Opciones',
-        scope: this,
-        icon: 'img/table_refresh.png',
-        menu: [
-            {text: 'Editar', iconCls: 'icon-editar-parking', tooltip: 'Editar Posición de Parqueaderos', handler: function () {
-                    windowEditParking();
-                }}
-        ]
-    });
-
     var administracion = Ext.create('Ext.button.Button', {
         text: 'Administración',
         iconCls: 'icon-Administracion',
         scope: this,
         menu: [
             {text: 'Usuarios', iconCls: 'icon-user', handler: function () {
-                    ventAddUser();
+                    showWinAdminUsuarios();
                 }},
             {text: 'Personal', iconCls: 'icon-personal', handler: function () {
-                    ventAddPersonal();
+                    showWinAdminPersonas();
                 }},
-//            {text : 'Parking', iconCls : 'icon-parqueo', handler : function(){windowParking();}},
             {text: 'Zonas', iconCls: 'icon-direccion', handler: function () {
                     ventAddZona();
                 }},
-            {text: 'Parqueaderos', iconCls: 'icon-direccion', handler: function () {
+            {text: 'Parqueaderos', iconCls: 'icon-parqueo', handler: function () {
                     showWinAdminParking();
                 }},
-            {text: 'Sitios Recaudo', iconCls: 'icon-direccion', handler: function () {
+            {text: 'Sitios Recaudo', iconCls: 'icon-ico', handler: function () {
                     showWinAdminSitios();
                 }},
-            {text: 'Sanciones', iconCls: 'icon-direccion', handler: function () {
+            {text: 'Sanciones', iconCls: 'icon-pos-des-coop', handler: function () {
                     showWinAdminSancion();
                 }},
         ]
     });
-
-    var extra = Ext.create('Ext.button.Button', {
-        text: 'Extra',
-        scope: this,
-        icon: 'img/table_refresh.png',
-        menu: [
-            {text: 'Direcciones', iconCls: 'icon-direccion', handler: function () {
-                    ventDireccion();
-                }}
-        ]
-    });
-
     var salir = Ext.create('Ext.button.Button', {
         text: 'Salir',
         scope: this,
@@ -185,11 +150,8 @@ Ext.onReady(function () {
         width: '100%',
         items: [
             graficas,
-            opciones,
             administracion,
-            extra,
             salir,
-            limpiar
         ]
     });
 
@@ -272,7 +234,6 @@ Ext.onReady(function () {
                 tools: [{
                         type: 'help',
                         handler: function () {
-                            // show help here
                         }
                     }, {
                         type: 'refresh',
@@ -282,10 +243,6 @@ Ext.onReady(function () {
                         handler: function () {
                             var tree = Ext.getCmp('puntos-tree');
                             tree.body.mask('Loading', 'x-mask-loading');
-                            /*storeTreeBuses.reload(function(){
-                             tree.body.unmask();
-                             Ext.example.msg('Buses', 'Recargado');
-                             });*/
                             storeTreeParking.reload();
                             Ext.example.msg('Mensaje', 'Parqueaderos Recargados..');
                             tree.body.unmask();
@@ -293,7 +250,6 @@ Ext.onReady(function () {
                     }, {
                         type: 'search',
                         handler: function (event, target, owner, tool) {
-                            // do search                    
                             owner.child('#refresh_puntos').show();
                         }
                     }],
@@ -318,7 +274,6 @@ Ext.onReady(function () {
                 tools: [{
                         type: 'help',
                         handler: function () {
-                            // show help here
                         }
                     }, {
                         type: 'refresh',
@@ -328,10 +283,6 @@ Ext.onReady(function () {
                         handler: function () {
                             var tree = Ext.getCmp('puntos-tree');
                             tree.body.mask('Loading', 'x-mask-loading');
-                            /*storeTreeBuses.reload(function(){
-                             tree.body.unmask();
-                             Ext.example.msg('Buses', 'Recargado');
-                             });*/
                             storeTreeSite.reload();
                             Ext.example.msg('Mensaje', 'Parqueaderos Recargados..');
                             tree.body.unmask();
@@ -339,7 +290,6 @@ Ext.onReady(function () {
                     }, {
                         type: 'search',
                         handler: function (event, target, owner, tool) {
-                            // do search                    
                             owner.child('#refresh_puntos').show();
                         }
                     }],
@@ -381,55 +331,6 @@ Ext.onReady(function () {
     var storeDirecciones = Ext.create('Ext.data.Store', {
         pageSize: 10,
         model: 'direcciones'
-    });
-
-    var direcciones = Ext.create('Ext.form.Panel', {
-        frame: true,
-        region: 'north',
-        layout: 'column',
-        items: [{
-                layout: 'fit',
-                baseCls: 'x-plain',
-                bodyStyle: 'padding:3px 5px 0 3px',
-                width: 400,
-                items: [{
-                        xtype: 'combo',
-                        store: storeDirecciones,
-                        fieldLabel: 'Direccion',
-                        displayField: 'todo',
-                        labelWidth: 60,
-                        typeAhead: false,
-                        hideTrigger: true,
-                        anchor: '100%',
-                        emptyText: 'Ciudad,Barrio,Avenida Principal,Avenida Secundaria',
-                        listConfig: {
-                            loadingText: 'Buscando...',
-                            emptyText: 'No ha encontrado resultados parecidos.',
-                            // Custom rendering template for each item
-                            getInnerTpl: function () {
-                                return '<b>{pais} , {ciudad}:</b><br>{barrio} , {avenidaP} , {avenidaS}';
-                            }
-                        },
-                        listeners: {
-                            select: function (thisObject, record, eOpts) {
-                                var longitud = record[0].data.longitud;
-                                var latitud = record[0].data.latitud;
-                                var zoom = 18;
-                                searchDirection(longitud, latitud, zoom);
-                            }
-                        },
-                        pageSize: 10
-                    }]
-            }, {
-                baseCls: 'x-plain',
-                bodyStyle: 'padding:3px 0 0 5px',
-                items: [{
-                        xtype: 'button',
-                        iconCls: 'icon-localizame',
-                        tooltip: 'Localizame',
-                        handler: getLocation
-                    }]
-            }]
     });
 
     var panelCentral = Ext.create('Ext.form.Panel', {

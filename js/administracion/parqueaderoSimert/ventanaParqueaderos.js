@@ -226,9 +226,9 @@ function showWinAdminParking() {
         winAdminParkings = Ext.create('Ext.window.Window', {
             layout: 'fit',
             title: 'Administración de Parqueaderos Privados',
-            iconCls: 'icon-person',
+            iconCls: 'icon-parqueo',
             resizable: false,
-            width: 780,
+            width: 785,
             height: 400,
             closeAction: 'hide',
             plain: false,

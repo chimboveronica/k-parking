@@ -2,20 +2,24 @@
 
 require_once('../../../dll/conect.php');
 
-extract($_POST);
-
-$json = json_decode($personas, true);
-
-$destroySql = 
-    "DELETE FROM PERSONAS WHERE ID_PERSONA = ".$json["id"]
-;
-
-if (consulta($destroySql) == 1) {
-    $salida = "{success:true, message:'Datos Eliminados Correctamente.'}";
+if (!$mysqli = getConectionDb()) {
+    echo "{success:true, message: 'Error: No se ha podido conectar a la Base de Datos.<br>Compruebe su conexión a Internet.',state: false}";
 } else {
-    $salida = "{success:false, message:'$destroySql'}";
+    $requestBody = file_get_contents('php://input');
+    $json = json_decode($requestBody, true);
+    $destroySql = "delete from personas where id_persona= ?";
+    $stmt = $mysqli->prepare($destroySql);
+    if ($stmt) {
+        $stmt->bind_param("i", $json["id"]);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            echo "{success:true, message:'Datos Eliminados Correctamente.',state: true}";
+        } else {
+            echo "{success:true, message: 'No se puede eliminar esta Sitio.',state: false}";
+        }
+        $stmt->close();
+    } else {
+        echo "{success:true, message: 'Problemas en la construcción de la consulta.',state: false}";
+    }
+    $mysqli->close();
 }
-
-
-echo $salida;
-?>

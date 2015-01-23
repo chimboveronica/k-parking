@@ -1,8 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 var winAddZona;
 var contenedorZona
@@ -17,7 +12,6 @@ var id_empresageos = 0;
 var areaEdit;
 var coordenadasEdit = '';
 Ext.onReady(function () {
-    //Fenera campos de array para usar en el inicio del store por defecto
     Ext.define('DataObjectZona', {
         extend: 'Ext.data.Model',
         fields: [
@@ -32,8 +26,6 @@ Ext.onReady(function () {
             {name: 'tiempoFraccion', type: 'date', dateFormat: 'H:i:s'},
         ]
     });
-
-    // crea los datos del store
     var gridStore = Ext.create('Ext.data.Store', {
         autoLoad: true,
         autoSync: true,
@@ -79,8 +71,6 @@ Ext.onReady(function () {
             }
         }
     });
-
-    // Column Model shortcut array
     var columns = [
         {header: "Id", flex: 10, sortable: true, dataIndex: 'id', filterable: true},
         {header: "Zona", width: 100, sortable: true, dataIndex: 'nombre', filter: {type: 'string'}},
@@ -88,8 +78,6 @@ Ext.onReady(function () {
         {header: "Costo", width: 100, sortable: true, dataIndex: 'costo', filter: {type: 'list', store: storeRolUserList}},
         {header: "Descripción", width: 100, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
     ];
-
-    // declare the source Grid
     gridRecordsZona = Ext.create('Ext.grid.Panel', {
         width: '45%',
         margins: '0 2 0 0',
@@ -183,16 +171,6 @@ Ext.onReady(function () {
                         emptyText: '00:00:00',
                         invalidText: 'El formato de la hora no es válido',
                         increment: 15},
-//        {
-//                xtype: 'numberfield',
-//                name: 'costo',
-//                fieldLabel: 'Costo/min:',
-//                emptyText: 'Numero de Plazas..',
-//                allowBlank: false,
-//                maxValue: 20,
-//                minValue: 6
-//            },
-
                     {
                         fieldLabel: 'Zona',
                         name: 'coordenadas',
@@ -204,7 +182,6 @@ Ext.onReady(function () {
                         xtype: 'textarea',
                         fieldLabel: 'Descripción',
                         name: 'descripcion',
-//                labelWidth: 20,
                         height: 100,
                         emptyText: 'Ingresar Descripción...'
                     },
@@ -252,21 +229,13 @@ Ext.onReady(function () {
                                         modifyLine.activate();
                                         Ext.create('Ext.menu.Menu', {
                                             width: 100,
-                                            floating: true, // usually you want this set to True (default)
-                                            renderTo: 'map', // usually rendered by it's containing componen
+                                            floating: true,
+                                            renderTo: 'map',
                                             items: [{
                                                     iconCls: 'icon-valid',
                                                     text: 'Terminar',
                                                     handler: function () {
-
-//                                                                        console.log('terminar');
-//                                                                        var areaGeoce = lines.features[0].geometry.getArea();
-//                                                                        console.log(areaGeoce);
-//                                                                        Ext.getCmp('numberfield-point-route').setValue(lines.features[0].geometry.components.length);
-//                                                                        modifyLine.deactivate();
-//                                                                        winAddGeocerca.show();
                                                         geometria = lines.features[0].geometry;
-                                                        ////figura
                                                         console.log(geometria + 'geometria');
                                                         var area = geometria.getArea() / 1000;
                                                         area = Math.round(area * 100) / 100;
@@ -366,8 +335,8 @@ function ventAddZona() {
                     title: 'Administración de Zonas',
                     iconCls: 'icon-person',
                     resizable: false,
-                    width: 780,
-                    height: 480,
+                    width: 795,
+                    height: 550,
                     closeAction: 'hide',
                     plain: false,
                     items: [{

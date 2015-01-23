@@ -249,10 +249,10 @@ function showWinAdminSitios() {
         winAdminSitio = Ext.create('Ext.window.Window', {
             layout: 'fit',
             title: 'Administración de Sitios de Recaudo',
-            iconCls: 'icon-person',
+            iconCls: 'icon-ico',
             resizable: false,
-            width: 780,
-            height: 480,
+            width: 790,
+            height: 530,
             closeAction: 'hide',
             plain: false,
             items: [{

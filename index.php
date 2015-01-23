@@ -8,8 +8,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
         <!--<meta name="apple-mobile-web-app-capable" content="yes">-->
         <link rel="shortcut icon" href="img/k.png" type="image/x-icon">
-        
-        <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css">
+                  <script type="text/javascript" src="extjs-docs-5.0.0/extjs-build/build/examples/shared/options-toolbar.js"></script>
+        <script type="text/javascript" src="extjs-docs-5.0.0/extjs-build/build/examples/shared/include-ext.js"></script>
+
+        <!--<link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/packages/ext-theme-gray/build/resources/ext-theme-gray-all.css">-->
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/shared/example.css">
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/shared/example.css">
         <link rel="stylesheet" type="text/css" href="extjs-docs-5.0.0/extjs-build/build/examples/ux/css/ItemSelector.css">

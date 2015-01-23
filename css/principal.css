@@ -71,15 +71,6 @@ td.tabla_titulo h3{
 .icon-today {background-image: url(../img/icon_hoy.png) !important;}
 .icon-yesterday {background-image: url(../img/icon_ayer.png) !important;}
 
-/*Iconos Parqueadero*/
-.icon-parqueo {background-image: url(../img/icon_parking.png) !important;}
-.icon-parking {background-image: url(../img/parking.png) !important;}
-.icon-obtener-coord {background-image: url(../img/obtener_coord.png) !important;}
-.icon-editar-parking {background-image: url(../img/icon_editar.png) !important;}
-.icon-asignar-plazas {background-image: url(../img/asignar_plazas.png) !important;}
-.icon-estadistica {background-image: url(../img/icon_estadistica.png) !important;}
-.icon-grafica-por-dia {background-image: url(../img/grafica_por_dia.png) !important;}
-.icon-save-img {background-image: url(../img/save_img.png) !important;}
 
 /*Otros*/
 .icon-reportes {background-image: url(../img/reportes.png) !important;}
@@ -87,7 +78,6 @@ td.tabla_titulo h3{
 .icon-general {background-image: url(../img/general.png) !important;}
 .icon-despachos {background-image: url(../img/despachos.png) !important;}
 .icon-rutas {background-image: url(../img/rutas.png) !important;}
-.icon-pos-des-coop {background-image: url(../img/pos_despachos_coop.png) !important;}
 .icon-pos-des-ruta {background-image: url(../img/pos_despachos_ruta.png) !important;}
 .icon-time-manual {background-image: url(../img/manual.png) !important;}
 .icon-obtener {background-image: url(../img/obtener.png) !important;}
@@ -95,19 +85,15 @@ td.tabla_titulo h3{
 
 .icon-cancelar {background-image: url(../img/cross.gif) !important;}
 .bus{background-image: url(../img/bus_rojo.png) !important;}
-.coopIco{background-image: url(../img/icon_empresa.png) !important;}
 .puntoIco{background-image: url(../img/connect.gif) !important;}
 .estacionIco{background-image: url(../img/localizacion.png) !important;}
 .icon-Administracion{background-image: url(../img/admin.png) !important;}
 .icon-save {background-image: url(../img/save.gif) !important;}
 .icon-user-add {background-image: url(../img/user_add.gif) !important;}
-.icon-user {background-image: url(../img/user.gif) !important;}
 .icon-consultas {background-image: url(../img/icon_consultas.png) !important;}
 .icon-reset {background-image: url(../img/icon_reset.png) !important;}
 .icon-delete {background-image: url(../img/delete.gif) !important;}
-.icon-personal {background-image: url(../img/user_suit.gif) !important;}
 .icon-bus{background-image: url(../img/icon_bus.png) !important;}
-.icon-direccion{background-image: url(../img/book.png) !important;}
 .icon-negocio{background-image: url(../img/icon_negocio.png) !important;}
 .icon-plugin{background-image: url(../img/plugin.gif) !important;}
 .icon-monitoreo {background-image: url(../img/icon_monitoreo.png) !important;}
@@ -120,6 +106,26 @@ td.tabla_titulo h3{
 //para geocercas
 .icon-delete {background-image: url(../img/delete.gif) !important;}
 .icon-add{background-image: url(../img/icon_add.gif) !important;}
+.icon-ico{background-image: url(../img/centIco.png) !important;}
+
+
+
+/*Iconos Parqueadero*/
+.icon-parking {background-image: url(../img/parking.png) !important;}
+.icon-obtener-coord {background-image: url(../img/obtener_coord.png) !important;}
+.icon-editar-parking {background-image: url(../img/icon_editar.png) !important;}
+.icon-asignar-plazas {background-image: url(../img/asignar_plazas.png) !important;}
+.icon-estadistica {background-image: url(../img/icon_estadistica.png) !important;}
+.icon-grafica-por-dia {background-image: url(../img/grafica_por_dia.png) !important;}
+.icon-save-img {background-image: url(../img/save_img.png) !important;}
+
+//requiere
+.icon-empresa{background-image: url(../img/centIco.png) !important;}
+.icon-pos-des-coop {background-image: url(../img/pos_despachos_coop.png) !important;}
+.icon-user {background-image: url(../img/user.gif) !important;}
+.icon-personal {background-image: url(../img/user_suit.gif) !important;}
+.icon-direccion{background-image: url(../img/book.png) !important;}
+.icon-parqueo {background-image: url(../img/icon_parking.png) !important;}
 
 
 #icono{
