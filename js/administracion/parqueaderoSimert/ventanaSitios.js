@@ -63,8 +63,8 @@ Ext.onReady(function () {
         columns: [
             Ext.create('Ext.grid.RowNumberer', {text: 'Nº', width: 30, align: 'center'}),
             {header: "Sitio", width: 100, sortable: true, dataIndex: 'nombre', filter: {type: 'string'}, align: 'center'},
-            {header: "Dirección", width: 100, sortable: true, dataIndex: 'direccion', filter: {type: 'string'}},
-            {header: "Descripción", width: 100, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
+            {header: "Dirección", width: 150, sortable: true, dataIndex: 'direccion', filter: {type: 'string'}},
+            {header: "Descripción", width: 150, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
             {header: "Latitud", width: 100, sortable: true, dataIndex: 'latitudSitio', filter: {type: 'string'}},
             {header: "Longitud", width: 110, sortable: true, dataIndex: 'longitudSitio', filter: {type: 'string'}}
         ],

@@ -142,10 +142,15 @@ Ext.onReady(function () {
      });*/
     lines = new OpenLayers.Layer.Vector("Lines", {
         styleMap: new OpenLayers.StyleMap({
-            pointRadius: 3,
-            strokeColor: "#ff3300",
+               pointRadius: 3,
+            strokeColor: "${color}",
+            label: "${zona}",
+            fontSize: "20px",
+            fontFamily: "Times New Roman",
+            fontWeight: "bold",
+            fontColor: "${color}",
             strokeWidth: 3,
-            fillOpacity: 0
+            fillOpacity: 0.3,
         })
     });
     map.events.register('click', map, function (e) {
@@ -435,7 +440,7 @@ function drawPoligonoGeocerca(dataRoute) {
     drawRoute = false;
 }
 
-function drawZonas(dataRoute) {
+function drawZonas(dataRoute,zona,color) {
     
     var puntosRuta = new Array();
     var json = dataRoute.split(";");
@@ -447,7 +452,10 @@ function drawZonas(dataRoute) {
         puntosRuta.push(pt);
     }
     var linearRing = new OpenLayers.Geometry.LinearRing(puntosRuta);
-    var polygonFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Polygon([linearRing]));
+    var polygonFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Polygon([linearRing]), {
+                color: color,
+                zona: zona
+            });
     lines.addFeatures([polygonFeature]);
     drawRoute = false;
 }

@@ -50,9 +50,14 @@ function loadLayers() {
     lines = new OpenLayers.Layer.Vector("Lines", {
         styleMap: new OpenLayers.StyleMap({
             pointRadius: 3,
-            strokeColor: "#ff3300",
+            strokeColor: "${color}",
+            label: "${zona}",
+            fontSize: "20px",
+            fontFamily: "Times New Roman",
+            fontWeight: "bold",
+            fontColor: "${color}",
             strokeWidth: 3,
-            fillOpacity: 0
+            fillOpacity: 0.3,
         })
     });
     line = new OpenLayers.Layer.Vector("Lines", {

@@ -65,10 +65,10 @@ Ext.onReady(function () {
     gridAdminParkings = Ext.create('Ext.grid.Panel', {
         store: gridStore,
         columns: [
-            {header: "Id", flex: 10, sortable: true, dataIndex: 'id', filterable: true},
-            {header: "Parqueadero", width: 100, sortable: true, dataIndex: 'parqueadero', filter: {type: 'string'}},
-            {header: "Dirección", width: 200, sortable: true, dataIndex: 'direccion', filter: {type: 'string'}},
-            {header: "Plazas", width: 100, sortable: true, dataIndex: 'plazas'},
+            {header: "Id", flex: 10, sortable: true, dataIndex: 'id', filterable: true, aling:'center'},
+            {header: "Parqueadero", width: 200, sortable: true, dataIndex: 'parqueadero', filter: {type: 'string'},aling:'center'},
+            {header: "Dirección", width: 200, sortable: true, dataIndex: 'direccion', filter: {type: 'string'},aling:'center'},
+            {header: "Plazas", width: 100, sortable: true, dataIndex: 'plazas',aling:'center'},
         ],
         stripeRows: true,
         width: '50%',
@@ -228,7 +228,7 @@ function showWinAdminParking() {
             title: 'Administración de Parqueaderos Privados',
             iconCls: 'icon-parqueo',
             resizable: false,
-            width: 785,
+            width: 790,
             height: 400,
             closeAction: 'hide',
             plain: false,

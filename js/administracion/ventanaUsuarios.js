@@ -62,9 +62,9 @@ Ext.onReady(function () {
         columns: [
             {header: "Cedula", width: 100, sortable: true, dataIndex: 'cedula', filter: {type: 'string'}},
             {header: "Persona", width: 200, sortable: true, dataIndex: 'persona', filter: {type: 'string'}},
-            {header: "Rol", width: 100, sortable: true, dataIndex: 'idRol', filter: {type: 'list', store: storeRolUserList}},
-            {header: "Usuario", width: 100, sortable: true, dataIndex: 'usuario', filter: {type: 'string'}},
-            {header: "Parqueadero", width: 150, sortable: true, dataIndex: 'idParking', filter: {type: 'string'}}
+            {header: "Rol", width: 180, sortable: true, dataIndex: 'idRol', filter: {type: 'list', store: storeRolUserList}},
+            {header: "Usuario", width: 180, sortable: true, dataIndex: 'usuario', filter: {type: 'string'}},
+            {header: "Parqueadero", width: 180, sortable: true, dataIndex: 'idParking', filter: {type: 'string'}}
         ],
         stripeRows: true,
         width: '50%',

@@ -76,7 +76,7 @@ Ext.onReady(function () {
         {header: "Zona", width: 100, sortable: true, dataIndex: 'nombre', filter: {type: 'string'}},
         {header: "Horario", width: 200, sortable: true, dataIndex: 'horario', filter: {type: 'string'}},
         {header: "Costo", width: 100, sortable: true, dataIndex: 'costo', filter: {type: 'list', store: storeRolUserList}},
-        {header: "Descripción", width: 100, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
+        {header: "Descripción", width: 180, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
     ];
     gridRecordsZona = Ext.create('Ext.grid.Panel', {
         width: '45%',

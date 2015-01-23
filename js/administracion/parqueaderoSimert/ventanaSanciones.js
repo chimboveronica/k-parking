@@ -61,7 +61,7 @@ Ext.onReady(function () {
             Ext.create('Ext.grid.RowNumberer', {text: 'Nº', width: 30, align: 'center'}),
             {header: "Motivo", width: 100, sortable: true, dataIndex: 'motivo', filter: {type: 'string'}, align: 'center'},
             {header: "Valor", width: 100, sortable: true, dataIndex: 'valor', filter: {type: 'string'}},
-            {header: "Descripción", width: 100, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
+            {header: "Descripción", width: 150, sortable: true, dataIndex: 'descripcion', filter: {type: 'string'}},
         ],
         stripeRows: true,
         width: '50%',

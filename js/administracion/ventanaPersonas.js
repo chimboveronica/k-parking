@@ -66,8 +66,8 @@ Ext.onReady(function () {
         store: gridStore,
         columns: [
             {header: "Cedula", width: 80, sortable: true, dataIndex: 'cedula', filter: {type: 'string'}},
-            {header: "Apellidos", width: 100, sortable: true, dataIndex: 'apellidos', filter: {type: 'string'}},
-            {header: "Nombres", width: 100, sortable: true, dataIndex: 'nombres', filter: {type: 'string'}},
+            {header: "Apellidos", width: 150, sortable: true, dataIndex: 'apellidos', filter: {type: 'string'}},
+            {header: "Nombres", width: 150, sortable: true, dataIndex: 'nombres', filter: {type: 'string'}},
             {header: "Empleo", width: 80, sortable: true, dataIndex: 'cbxEmpleo', filter: {type: 'string'}},
             {header: "Fec. Nac", width: 80, sortable: true, xtype: 'datecolumn', format: 'Y-m-d', dataIndex: 'fecha_nacimiento', filter: true, renderer: Ext.util.Format.dateRenderer('m/d/Y')},
             {header: "Dirección", width: 80, sortable: true, dataIndex: 'direccion', filter: {type: 'string'}},
