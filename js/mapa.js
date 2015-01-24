@@ -472,6 +472,6 @@ function drawZona(dataRoute) {
     }
     var linearRing = new OpenLayers.Geometry.LinearRing(puntosRuta);
     var polygonFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Polygon([linearRing]));
-    line.addFeatures([polygonFeature]);
+    lines.addFeatures([polygonFeature]);
     drawRoute = false;
 }
